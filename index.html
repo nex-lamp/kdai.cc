@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KDAI - 深海工业照明专家</title>
+  <meta name="description" content="KDAI专注无人潜行器与深海勘探照明解决方案，提供深海防水、高亮度、长寿命工业级照明设备。">
+  <style>
+    /* ===== Reset & Global ===== */
+    *, *::before, *::after {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "Inter", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #082850;
+      --primary-hover: #0A346E;
+      --secondary: #2478C2;
+      --accent: #D97706;
+      --accent-hover: #EA8C07;
+      --bg: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #1D2129;
+      --text-secondary: #666666;
+      --border: #E5E6EB;
+      --radius: 6px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ===== Banner ===== */
+    .banner {
+      background-color: var(--primary);
+      padding: 140px 40px 80px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .banner h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 16px;
+    }
+
+    .banner p {
+      font-size: 15px;
+      line-height: 1.8;
+      opacity: 0.85;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== Section Common ===== */
+    .section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* ===== Cards Grid ===== */
+    .card-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .card-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border-radius: var(--radius);
+      color: var(--secondary);
+      font-size: 22px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Application Scenarios ===== */
+    .scenario-section {
+      background: var(--card);
+      padding: 60px 40px;
+    }
+
+    .scenario-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .scenario-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+      background: var(--card);
+    }
+
+    .scenario-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .scenario-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .scenario-card-body {
+      padding: 16px;
+    }
+
+    .scenario-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .scenario-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Product Card ===== */
+    .product-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card-body {
+      padding: 16px;
+    }
+
+    .product-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .product-specs {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .product-specs span {
+      display: inline-block;
+      margin-right: 16px;
+    }
+
+    /* ===== Buttons ===== */
+    .btn-primary {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--card);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      text-decoration: none;
+    }
+
+    .btn-accent {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-accent:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+
+    /* ===== CTA Section ===== */
+    .cta-section {
+      background: var(--primary);
+      padding: 60px 40px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .cta-section h2 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 15px;
+      line-height: 1.8;
+      opacity: 0.85;
+      margin-bottom: 24px;
+    }
+
+    .cta-section .btn-accent {
+      font-size: 16px;
+      padding: 12px 32px;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .footer-contact {
+      font-size: 13px;
+      opacity: 0.85;
+      text-align: right;
+    }
+
+    .footer-contact p {
+      margin-bottom: 4px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .navbar-inner,
+      .section,
+      .banner,
+      .scenario-section,
+      .cta-section,
+      .footer {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .card-grid-4,
+      .scenario-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card-grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar-inner,
+      .section,
+      .banner,
+      .scenario-section,
+      .cta-section,
+      .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .banner {
+        padding-top: 110px;
+        padding-bottom: 60px;
+      }
+
+      .banner h1 {
+        font-size: 22px;
+      }
+
+      .card-grid-4,
+      .scenario-grid,
+      .card-grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .footer-contact {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">KDAI</div>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active" data-cn="首页" data-en="Home">首页</a></li>
+        <li><a href="products.html" data-cn="产品中心" data-en="Products">产品中心</a></li>
+        <li><a href="about.html" data-cn="关于我们" data-en="About Us">关于我们</a></li>
+      </ul>
+      <div class="lang-switch">
+        <button id="lang-cn" class="active">中文</button>
+        <button id="lang-en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner -->
+  <section class="banner">
+    <h1 data-cn="深海工业照明专家" data-en="Deep Sea Industrial Lighting Expert">深海工业照明专家</h1>
+    <p data-cn="专注无人潜行器与深海勘探照明解决方案，为极端水下环境提供可靠照明" data-en="Specialized in lighting solutions for UUVs and deep sea exploration, providing reliable illumination for extreme underwater environments">专注无人潜行器与深海勘探照明解决方案，为极端水下环境提供可靠照明</p>
+  </section>
+
+  <!-- Core Advantages -->
+  <section class="section">
+    <h2 class="section-title" data-cn="核心优势" data-en="Core Advantages">核心优势</h2>
+    <div class="card-grid-4">
+      <div class="card">
+        <div class="card-icon">&#9832;</div>
+        <h3 data-cn="深海防水" data-en="Deep Sea Waterproof">深海防水</h3>
+        <p data-cn="6000米深度防水认证，满足极端深海作业环境要求" data-en="6000m depth waterproof certified for extreme deep sea operations">6000米深度防水认证，满足极端深海作业环境要求</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9728;</div>
+        <h3 data-cn="高亮度" data-en="High Brightness">高亮度</h3>
+        <p data-cn="最高6000流明输出，为深海作业提供充足照明保障" data-en="Up to 6000 lumens output for adequate deep sea illumination">最高6000流明输出，为深海作业提供充足照明保障</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#8734;</div>
+        <h3 data-cn="长寿命" data-en="Long Lifespan">长寿命</h3>
+        <p data-cn="LED光源寿命超50000小时，降低维护更换成本" data-en="LED lifespan over 50000 hours, reducing maintenance costs">LED光源寿命超50000小时，降低维护更换成本</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#9881;</div>
+        <h3 data-cn="定制化服务" data-en="Custom Service">定制化服务</h3>
+        <p data-cn="根据客户需求提供光学设计与结构定制方案" data-en="Custom optical design and structural solutions based on client needs">根据客户需求提供光学设计与结构定制方案</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Application Scenarios -->
+  <section class="scenario-section">
+    <div class="scenario-inner">
+      <h2 class="section-title" data-cn="应用场景" data-en="Application Scenarios">应用场景</h2>
+      <div class="scenario-grid">
+        <div class="scenario-card">
+          <img src="https://picsum.photos/seed/kdai-sub/400/200" alt="无人潜水艇">
+          <div class="scenario-card-body">
+            <h3 data-cn="无人潜水艇" data-en="Unmanned Submarines">无人潜水艇</h3>
+            <p data-cn="为无人潜水艇提供全方位照明方案" data-en="Comprehensive lighting solutions for unmanned submarines">为无人潜水艇提供全方位照明方案</p>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <img src="https://picsum.photos/seed/kdai-explore/400/200" alt="深海勘探">
+          <div class="scenario-card-body">
+            <h3 data-cn="深海勘探" data-en="Deep Sea Exploration">深海勘探</h3>
+            <p data-cn="高亮度照明助力深海资源勘探作业" data-en="High brightness lighting for deep sea resource exploration">高亮度照明助力深海资源勘探作业</p>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <img src="https://picsum.photos/seed/kdai-eng/400/200" alt="海洋工程">
+          <div class="scenario-card-body">
+            <h3 data-cn="海洋工程" data-en="Marine Engineering">海洋工程</h3>
+            <p data-cn="满足海洋工程作业的工业照明需求" data-en="Industrial lighting for marine engineering operations">满足海洋工程作业的工业照明需求</p>
+          </div>
+        </div>
+        <div class="scenario-card">
+          <img src="https://picsum.photos/seed/kdai-rov/400/200" alt="水下机器人">
+          <div class="scenario-card-body">
+            <h3 data-cn="水下机器人" data-en="Underwater Robots">水下机器人</h3>
+            <p data-cn="为ROV提供专业水下照明设备" data-en="Professional underwater lighting for ROVs">为ROV提供专业水下照明设备</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section">
+    <h2 class="section-title" data-cn="精选产品" data-en="Featured Products">精选产品</h2>
+    <div class="card-grid-3">
+      <div class="product-card">
+        <img src="https://picsum.photos/seed/kdai-dl2000/400/240" alt="KDAI-DL2000">
+        <div class="product-card-body">
+          <h3 data-cn="KDAI-DL2000 深海LED照明灯" data-en="KDAI-DL2000 Deep Sea LED Light">KDAI-DL2000 深海LED照明灯</h3>
+          <div class="product-specs">
+            <span data-cn="2000流明" data-en="2000lm">2000流明</span>
+            <span data-cn="6000米防水" data-en="6000m Waterproof">6000米防水</span>
+          </div>
+          <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://picsum.photos/seed/kdai-dm4000/400/240" alt="KDAI-DM4000">
+        <div class="product-card-body">
+          <h3 data-cn="KDAI-DM4000 深海高亮LED灯" data-en="KDAI-DM4000 High Brightness LED Light">KDAI-DM4000 深海高亮LED灯</h3>
+          <div class="product-specs">
+            <span data-cn="4000流明" data-en="4000lm">4000流明</span>
+            <span data-cn="4500米防水" data-en="4500m Waterproof">4500米防水</span>
+          </div>
+          <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://picsum.photos/seed/kdai-do3000/400/240" alt="KDAI-DO3000">
+        <div class="product-card-body">
+          <h3 data-cn="KDAI-DO3000 水下观测灯" data-en="KDAI-DO3000 Underwater Observation Light">KDAI-DO3000 水下观测灯</h3>
+          <div class="product-specs">
+            <span data-cn="3000流明" data-en="3000lm">3000流明</span>
+            <span data-cn="3000米防水" data-en="3000m Waterproof">3000米防水</span>
+          </div>
+          <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <h2 data-cn="需要定制照明方案？" data-en="Need Custom Lighting Solutions?">需要定制照明方案？</h2>
+    <p data-cn="我们的工程师团队随时为您提供专业的深海照明技术咨询与方案设计" data-en="Our engineering team is ready to provide professional deep sea lighting consultation and solution design">我们的工程师团队随时为您提供专业的深海照明技术咨询与方案设计</p>
+    <a href="about.html" class="btn-accent" data-cn="联系我们" data-en="Contact Us">联系我们</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copyright">
+        &copy; 2026 <span data-cn="汕尾市旷代深海照明有限公司" data-en="Shanwei Kuangdai Deep Sea Lighting Co., Ltd.">汕尾市旷代深海照明有限公司</span>. <span data-cn="版权所有" data-en="All Rights Reserved">版权所有</span>
+      </div>
+      <div class="footer-contact">
+        <p data-cn="联系人：刘生" data-en="Contact: Mr. Liu">联系人：刘生</p>
+        <p data-cn="电话：13825496855" data-en="Tel: 13825496855">电话：13825496855</p>
+        <p>nexlamp@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Language Switch JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var cnBtn = document.getElementById('lang-cn');
+      var enBtn = document.getElementById('lang-en');
+
+      function switchLang(lang) {
+        document.querySelectorAll('[data-cn]').forEach(function(el) {
+          el.textContent = el.getAttribute('data-' + lang);
+        });
+        cnBtn.classList.toggle('active', lang === 'cn');
+        enBtn.classList.toggle('active', lang === 'en');
+        localStorage.setItem('kdai-lang', lang);
+      }
+
+      cnBtn.addEventListener('click', function() { switchLang('cn'); });
+      enBtn.addEventListener('click', function() { switchLang('en'); });
+
+      var savedLang = localStorage.getItem('kdai-lang') || 'cn';
+      switchLang(savedLang);
+    });
+  </script>
+</body>
+</html>

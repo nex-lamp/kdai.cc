@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KDAI - KDAI-DL2000 深海LED照明灯</title>
+  <meta name="description" content="KDAI-DL2000深海LED照明灯，2000流明，6000米防水深度，专为无人潜行器设计。">
+  <style>
+    *, *::before, *::after {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "Inter", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #082850;
+      --primary-hover: #0A346E;
+      --secondary: #2478C2;
+      --accent: #D97706;
+      --accent-hover: #EA8C07;
+      --bg: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #1D2129;
+      --text-secondary: #666666;
+      --border: #E5E6EB;
+      --radius: 6px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 84px 40px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a {
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--secondary);
+    }
+
+    .breadcrumb span {
+      margin: 0 8px;
+    }
+
+    /* ===== Product Display ===== */
+    .product-display {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 40px 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .product-image {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .product-image img {
+      width: 100%;
+      height: auto;
+      min-height: 360px;
+      object-fit: cover;
+    }
+
+    .product-info h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .product-info .product-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .product-info .product-highlight {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .product-highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .product-highlight-item .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ===== Buttons ===== */
+    .btn-primary {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      text-decoration: none;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--card);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      text-decoration: none;
+    }
+
+    .btn-accent {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-accent:hover {
+      background: var(--accent-hover);
+      text-decoration: none;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    /* ===== Section Common ===== */
+    .section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-full {
+      padding: 60px 40px;
+      background: var(--card);
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    /* ===== Specs Table ===== */
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .specs-table th,
+    .specs-table td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+
+    .specs-table th {
+      background: var(--bg);
+      color: var(--text);
+      font-weight: 600;
+      width: 200px;
+    }
+
+    .specs-table td {
+      color: var(--text);
+    }
+
+    .specs-table tr:last-child th,
+    .specs-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* ===== Features ===== */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Downloads ===== */
+    .download-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .download-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .download-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .download-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .download-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .download-text p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .footer-contact {
+      font-size: 13px;
+      opacity: 0.85;
+      text-align: right;
+    }
+
+    .footer-contact p {
+      margin-bottom: 4px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .navbar-inner,
+      .breadcrumb,
+      .product-display,
+      .section,
+      .section-full,
+      .footer {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .product-display {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar-inner,
+      .breadcrumb,
+      .product-display,
+      .section,
+      .section-full,
+      .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .footer-contact {
+        text-align: center;
+      }
+
+      .download-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">KDAI</div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-cn="首页" data-en="Home">首页</a></li>
+        <li><a href="products.html" class="active" data-cn="产品中心" data-en="Products">产品中心</a></li>
+        <li><a href="about.html" data-cn="关于我们" data-en="About Us">关于我们</a></li>
+      </ul>
+      <div class="lang-switch">
+        <button id="lang-cn" class="active">中文</button>
+        <button id="lang-en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html" data-cn="首页" data-en="Home">首页</a>
+    <span>/</span>
+    <a href="products.html" data-cn="产品中心" data-en="Products">产品中心</a>
+    <span>/</span>
+    <span data-cn="KDAI-DL2000" data-en="KDAI-DL2000">KDAI-DL2000</span>
+  </div>
+
+  <!-- Product Display -->
+  <div class="product-display">
+    <div class="product-image">
+      <img src="https://picsum.photos/seed/kdai-dl2000-detail/600/500" alt="KDAI-DL2000">
+    </div>
+    <div class="product-info">
+      <h1 data-cn="KDAI-DL2000 深海LED照明灯" data-en="KDAI-DL2000 Deep Sea LED Light">KDAI-DL2000 深海LED照明灯</h1>
+      <p class="product-desc" data-cn="专为无人潜行器设计的高可靠性深海LED照明设备，采用钛合金外壳，具备卓越的耐压性能和抗腐蚀能力，适用于6000米深海作业环境。" data-en="High reliability deep sea LED lighting designed for UUVs, featuring titanium alloy housing with excellent pressure resistance and anti-corrosion, suitable for 6000m deep sea operations.">专为无人潜行器设计的高可靠性深海LED照明设备，采用钛合金外壳，具备卓越的耐压性能和抗腐蚀能力，适用于6000米深海作业环境。</p>
+      <div class="product-highlight">
+        <div class="product-highlight-item">
+          <div class="dot"></div>
+          <span data-cn="光通量：2000流明" data-en="Luminous Flux: 2000lm">光通量：2000流明</span>
+        </div>
+        <div class="product-highlight-item">
+          <div class="dot"></div>
+          <span data-cn="防水深度：6000米" data-en="Waterproof Depth: 6000m">防水深度：6000米</span>
+        </div>
+        <div class="product-highlight-item">
+          <div class="dot"></div>
+          <span data-cn="光源寿命：50000小时" data-en="Light Source Lifespan: 50000h">光源寿命：50000小时</span>
+        </div>
+        <div class="product-highlight-item">
+          <div class="dot"></div>
+          <span data-cn="外壳材质：钛合金" data-en="Housing Material: Titanium Alloy">外壳材质：钛合金</span>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a href="docs/product-manual.pdf" class="btn-accent" data-cn="下载规格书" data-en="Download Spec Sheet">下载规格书</a>
+        <a href="about.html" class="btn-outline" data-cn="咨询我们" data-en="Contact Us">咨询我们</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Technical Specifications -->
+  <div class="section-full">
+    <div class="section" style="padding-top: 0; padding-bottom: 0;">
+      <h2 class="section-title" data-cn="技术参数" data-en="Technical Specifications">技术参数</h2>
+      <table class="specs-table">
+        <tr>
+          <th data-cn="产品型号" data-en="Model">产品型号</th>
+          <td>KDAI-DL2000</td>
+        </tr>
+        <tr>
+          <th data-cn="光源类型" data-en="Light Source">光源类型</th>
+          <td data-cn="LED" data-en="LED">LED</td>
+        </tr>
+        <tr>
+          <th data-cn="光通量" data-en="Luminous Flux">光通量</th>
+          <td data-cn="2000流明" data-en="2000 lm">2000流明</td>
+        </tr>
+        <tr>
+          <th data-cn="色温" data-en="Color Temperature">色温</th>
+          <td data-cn="5000K（自然白）" data-en="5000K (Natural White)">5000K（自然白）</td>
+        </tr>
+        <tr>
+          <th data-cn="光束角度" data-en="Beam Angle">光束角度</th>
+          <td data-cn="120°" data-en="120°">120°</td>
+        </tr>
+        <tr>
+          <th data-cn="防水深度" data-en="Waterproof Depth">防水深度</th>
+          <td data-cn="6000米" data-en="6000m">6000米</td>
+        </tr>
+        <tr>
+          <th data-cn="工作电压" data-en="Operating Voltage">工作电压</th>
+          <td data-cn="DC 24V" data-en="DC 24V">DC 24V</td>
+        </tr>
+        <tr>
+          <th data-cn="功率" data-en="Power">功率</th>
+          <td data-cn="30W" data-en="30W">30W</td>
+        </tr>
+        <tr>
+          <th data-cn="外壳材质" data-en="Housing Material">外壳材质</th>
+          <td data-cn="钛合金" data-en="Titanium Alloy">钛合金</td>
+        </tr>
+        <tr>
+          <th data-cn="外形尺寸" data-en="Dimensions">外形尺寸</th>
+          <td data-cn="Ø120mm × 180mm" data-en="Ø120mm × 180mm">Ø120mm × 180mm</td>
+        </tr>
+        <tr>
+          <th data-cn="重量" data-en="Weight">重量</th>
+          <td data-cn="2.8kg（水中）" data-en="2.8kg (in water)">2.8kg（水中）</td>
+        </tr>
+        <tr>
+          <th data-cn="光源寿命" data-en="Lifespan">光源寿命</th>
+          <td data-cn="≥50000小时" data-en="≥50000 hours">≥50000小时</td>
+        </tr>
+        <tr>
+          <th data-cn="工作温度" data-en="Operating Temperature">工作温度</th>
+          <td data-cn="-20°C ~ +45°C" data-en="-20°C ~ +45°C">-20°C ~ +45°C</td>
+        </tr>
+        <tr>
+          <th data-cn="接口类型" data-en="Connector">接口类型</th>
+          <td data-cn="Subconn MCBH8F" data-en="Subconn MCBH8F">Subconn MCBH8F</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Product Features -->
+  <div class="section">
+    <h2 class="section-title" data-cn="产品特点" data-en="Product Features">产品特点</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3 data-cn="深海耐压设计" data-en="Deep Sea Pressure Design">深海耐压设计</h3>
+        <p data-cn="钛合金一体成型外壳，可承受6000米深海压力，通过第三方权威机构压力测试认证" data-en="One-piece titanium alloy housing withstands 6000m deep sea pressure, certified by third-party testing authority">钛合金一体成型外壳，可承受6000米深海压力，通过第三方权威机构压力测试认证</p>
+      </div>
+      <div class="feature-card">
+        <h3 data-cn="高效率LED光源" data-en="High Efficiency LED">高效率LED光源</h3>
+        <p data-cn="采用Cree XLamp系列LED芯片，光效达67lm/W，50000小时超长使用寿命" data-en="Cree XLamp LED chip, 67lm/W efficiency, 50000 hours ultra-long lifespan">采用Cree XLamp系列LED芯片，光效达67lm/W，50000小时超长使用寿命</p>
+      </div>
+      <div class="feature-card">
+        <h3 data-cn="宽电压输入" data-en="Wide Voltage Input">宽电压输入</h3>
+        <p data-cn="支持DC 12V-36V宽电压范围输入，兼容各类无人潜行器供电系统" data-en="Supports DC 12V-36V wide voltage input, compatible with various UUV power systems">支持DC 12V-36V宽电压范围输入，兼容各类无人潜行器供电系统</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Downloads -->
+  <div class="section-full">
+    <div class="section" style="padding-top: 0; padding-bottom: 0;">
+      <h2 class="section-title" data-cn="资料下载" data-en="Downloads">资料下载</h2>
+      <div class="download-list">
+        <div class="download-item">
+          <div class="download-info">
+            <div class="download-icon">&#128196;</div>
+            <div class="download-text">
+              <h4 data-cn="产品手册" data-en="Product Manual">产品手册</h4>
+              <p data-cn="PDF | 2.3 MB" data-en="PDF | 2.3 MB">PDF | 2.3 MB</p>
+            </div>
+          </div>
+          <a href="docs/product-manual.pdf" class="btn-accent" data-cn="下载" data-en="Download">下载</a>
+        </div>
+        <div class="download-item">
+          <div class="download-info">
+            <div class="download-icon">&#128196;</div>
+            <div class="download-text">
+              <h4 data-cn="规格书" data-en="Specification Sheet">规格书</h4>
+              <p data-cn="PDF | 1.1 MB" data-en="PDF | 1.1 MB">PDF | 1.1 MB</p>
+            </div>
+          </div>
+          <a href="docs/product-spec.pdf" class="btn-accent" data-cn="下载" data-en="Download">下载</a>
+        </div>
+        <div class="download-item">
+          <div class="download-info">
+            <div class="download-icon">&#128196;</div>
+            <div class="download-text">
+              <h4 data-cn="3D模型" data-en="3D Model">3D模型</h4>
+              <p data-cn="STEP | 5.8 MB" data-en="STEP | 5.8 MB">STEP | 5.8 MB</p>
+            </div>
+          </div>
+          <a href="docs/product-3d.step" class="btn-accent" data-cn="下载" data-en="Download">下载</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copyright">
+        &copy; 2026 <span data-cn="汕尾市旷代深海照明有限公司" data-en="Shanwei Kuangdai Deep Sea Lighting Co., Ltd.">汕尾市旷代深海照明有限公司</span>. <span data-cn="版权所有" data-en="All Rights Reserved">版权所有</span>
+      </div>
+      <div class="footer-contact">
+        <p data-cn="联系人：刘生" data-en="Contact: Mr. Liu">联系人：刘生</p>
+        <p data-cn="电话：13825496855" data-en="Tel: 13825496855">电话：13825496855</p>
+        <p>nexlamp@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Language Switch JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var cnBtn = document.getElementById('lang-cn');
+      var enBtn = document.getElementById('lang-en');
+
+      function switchLang(lang) {
+        document.querySelectorAll('[data-cn]').forEach(function(el) {
+          el.textContent = el.getAttribute('data-' + lang);
+        });
+        cnBtn.classList.toggle('active', lang === 'cn');
+        enBtn.classList.toggle('active', lang === 'en');
+        localStorage.setItem('kdai-lang', lang);
+      }
+
+      cnBtn.addEventListener('click', function() { switchLang('cn'); });
+      enBtn.addEventListener('click', function() { switchLang('en'); });
+
+      var savedLang = localStorage.getItem('kdai-lang') || 'cn';
+      switchLang(savedLang);
+    });
+  </script>
+</body>
+</html>

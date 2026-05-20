@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KDAI - 产品中心</title>
+  <meta name="description" content="KDAI深海照明产品中心，提供无人潜行器照明、深海勘探照明等专业设备。">
+  <style>
+    *, *::before, *::after {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "Inter", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #082850;
+      --primary-hover: #0A346E;
+      --secondary: #2478C2;
+      --accent: #D97706;
+      --accent-hover: #EA8C07;
+      --bg: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #1D2129;
+      --text-secondary: #666666;
+      --border: #E5E6EB;
+      --radius: 6px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 84px 40px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a {
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--secondary);
+    }
+
+    .breadcrumb span {
+      margin: 0 8px;
+    }
+
+    /* ===== Page Header ===== */
+    .page-header {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 40px 0;
+    }
+
+    .page-header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+
+    /* ===== Filter Bar ===== */
+    .filter-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 40px;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .filter-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ===== Product Grid ===== */
+    .product-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 40px 60px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .product-card-body {
+      padding: 16px;
+    }
+
+    .product-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .product-specs {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .product-specs span {
+      display: inline-block;
+      margin-right: 16px;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 10px 24px;
+      background: var(--card);
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      border-radius: var(--radius);
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--bg);
+      text-decoration: none;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .footer-contact {
+      font-size: 13px;
+      opacity: 0.85;
+      text-align: right;
+    }
+
+    .footer-contact p {
+      margin-bottom: 4px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .navbar-inner,
+      .breadcrumb,
+      .page-header,
+      .filter-bar,
+      .product-grid,
+      .footer {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar-inner,
+      .breadcrumb,
+      .page-header,
+      .filter-bar,
+      .product-grid,
+      .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .filter-bar {
+        flex-wrap: wrap;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .footer-contact {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">KDAI</div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-cn="首页" data-en="Home">首页</a></li>
+        <li><a href="products.html" class="active" data-cn="产品中心" data-en="Products">产品中心</a></li>
+        <li><a href="about.html" data-cn="关于我们" data-en="About Us">关于我们</a></li>
+      </ul>
+      <div class="lang-switch">
+        <button id="lang-cn" class="active">中文</button>
+        <button id="lang-en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html" data-cn="首页" data-en="Home">首页</a>
+    <span>/</span>
+    <span data-cn="产品中心" data-en="Products">产品中心</span>
+  </div>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <h1 data-cn="产品中心" data-en="Products">产品中心</h1>
+    <p data-cn="专业深海照明设备，满足各类水下作业需求" data-en="Professional deep sea lighting equipment for all underwater operations">专业深海照明设备，满足各类水下作业需求</p>
+  </div>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all" data-cn="全部产品" data-en="All Products">全部产品</button>
+    <button class="filter-btn" data-filter="uuv" data-cn="无人潜行器照明" data-en="UUV Lighting">无人潜行器照明</button>
+    <button class="filter-btn" data-filter="exploration" data-cn="深海勘探照明" data-en="Deep Sea Exploration Lighting">深海勘探照明</button>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="product-grid">
+
+    <div class="product-card" data-category="uuv">
+      <img src="https://picsum.photos/seed/kdai-dl2000/400/240" alt="KDAI-DL2000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DL2000 深海LED照明灯" data-en="KDAI-DL2000 Deep Sea LED Light">KDAI-DL2000 深海LED照明灯</h3>
+        <div class="product-specs">
+          <span data-cn="2000流明" data-en="2000lm">2000流明</span>
+          <span data-cn="6000米防水" data-en="6000m Waterproof">6000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="uuv">
+      <img src="https://picsum.photos/seed/kdai-dl4000/400/240" alt="KDAI-DL4000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DL4000 深海高亮LED灯" data-en="KDAI-DL4000 High Brightness LED Light">KDAI-DL4000 深海高亮LED灯</h3>
+        <div class="product-specs">
+          <span data-cn="4000流明" data-en="4000lm">4000流明</span>
+          <span data-cn="6000米防水" data-en="6000m Waterproof">6000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="uuv">
+      <img src="https://picsum.photos/seed/kdai-dl6000/400/240" alt="KDAI-DL6000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DL6000 超亮深海LED灯" data-en="KDAI-DL6000 Ultra Bright LED Light">KDAI-DL6000 超亮深海LED灯</h3>
+        <div class="product-specs">
+          <span data-cn="6000流明" data-en="6000lm">6000流明</span>
+          <span data-cn="4500米防水" data-en="4500m Waterproof">4500米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="exploration">
+      <img src="https://picsum.photos/seed/kdai-dm3000/400/240" alt="KDAI-DM3000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DM3000 开采作业LED灯" data-en="KDAI-DM3000 Mining Operation LED Light">KDAI-DM3000 开采作业LED灯</h3>
+        <div class="product-specs">
+          <span data-cn="3000流明" data-en="3000lm">3000流明</span>
+          <span data-cn="4500米防水" data-en="4500m Waterproof">4500米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="exploration">
+      <img src="https://picsum.photos/seed/kdai-dm5000/400/240" alt="KDAI-DM5000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DM5000 深海开采照明灯" data-en="KDAI-DM5000 Deep Sea Mining Light">KDAI-DM5000 深海开采照明灯</h3>
+        <div class="product-specs">
+          <span data-cn="5000流明" data-en="5000lm">5000流明</span>
+          <span data-cn="3000米防水" data-en="3000m Waterproof">3000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="uuv">
+      <img src="https://picsum.photos/seed/kdai-do2000/400/240" alt="KDAI-DO2000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DO2000 水下观测照明灯" data-en="KDAI-DO2000 Underwater Observation Light">KDAI-DO2000 水下观测照明灯</h3>
+        <div class="product-specs">
+          <span data-cn="2000流明" data-en="2000lm">2000流明</span>
+          <span data-cn="3000米防水" data-en="3000m Waterproof">3000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="uuv">
+      <img src="https://picsum.photos/seed/kdai-do4000/400/240" alt="KDAI-DO4000">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DO4000 高亮观测灯" data-en="KDAI-DO4000 High Brightness Observation Light">KDAI-DO4000 高亮观测灯</h3>
+        <div class="product-specs">
+          <span data-cn="4000流明" data-en="4000lm">4000流明</span>
+          <span data-cn="3000米防水" data-en="3000m Waterproof">3000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+    <div class="product-card" data-category="exploration">
+      <img src="https://picsum.photos/seed/kdai-dg1500/400/240" alt="KDAI-DG1500">
+      <div class="product-card-body">
+        <h3 data-cn="KDAI-DG1500 通用水下照明灯" data-en="KDAI-DG1500 General Underwater Light">KDAI-DG1500 通用水下照明灯</h3>
+        <div class="product-specs">
+          <span data-cn="1500流明" data-en="1500lm">1500流明</span>
+          <span data-cn="2000米防水" data-en="2000m Waterproof">2000米防水</span>
+        </div>
+        <a href="detail.html" class="btn-outline" data-cn="查看详情" data-en="View Details">查看详情</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copyright">
+        &copy; 2026 <span data-cn="汕尾市旷代深海照明有限公司" data-en="Shanwei Kuangdai Deep Sea Lighting Co., Ltd.">汕尾市旷代深海照明有限公司</span>. <span data-cn="版权所有" data-en="All Rights Reserved">版权所有</span>
+      </div>
+      <div class="footer-contact">
+        <p data-cn="联系人：刘生" data-en="Contact: Mr. Liu">联系人：刘生</p>
+        <p data-cn="电话：13825496855" data-en="Tel: 13825496855">电话：13825496855</p>
+        <p>nexlamp@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Language Switch + Filter JS -->
+  <script>
+    // Language switch
+    document.addEventListener('DOMContentLoaded', function() {
+      var cnBtn = document.getElementById('lang-cn');
+      var enBtn = document.getElementById('lang-en');
+
+      function switchLang(lang) {
+        document.querySelectorAll('[data-cn]').forEach(function(el) {
+          el.textContent = el.getAttribute('data-' + lang);
+        });
+        cnBtn.classList.toggle('active', lang === 'cn');
+        enBtn.classList.toggle('active', lang === 'en');
+        localStorage.setItem('kdai-lang', lang);
+      }
+
+      cnBtn.addEventListener('click', function() { switchLang('cn'); });
+      enBtn.addEventListener('click', function() { switchLang('en'); });
+
+      var savedLang = localStorage.getItem('kdai-lang') || 'cn';
+      switchLang(savedLang);
+
+      // Product filter
+      var filterBtns = document.querySelectorAll('.filter-btn');
+      var productCards = document.querySelectorAll('.product-card');
+
+      filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+
+          var filter = btn.getAttribute('data-filter');
+
+          productCards.forEach(function(card) {
+            if (filter === 'all' || card.getAttribute('data-category') === filter) {
+              card.style.display = '';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

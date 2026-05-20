@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KDAI - 关于我们</title>
+  <meta name="description" content="KDAI专注深海工业照明设备研发，为无人潜行器、深海勘探提供专业照明解决方案。">
+  <style>
+    *, *::before, *::after {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "Inter", sans-serif;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #082850;
+      --primary-hover: #0A346E;
+      --secondary: #2478C2;
+      --accent: #D97706;
+      --accent-hover: #EA8C07;
+      --bg: #F5F7FA;
+      --card: #FFFFFF;
+      --text: #1D2129;
+      --text-secondary: #666666;
+      --border: #E5E6EB;
+      --radius: 6px;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    a { color: var(--secondary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .navbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .lang-switch {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-switch button {
+      padding: 4px 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .lang-switch button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ===== Breadcrumb ===== */
+    .breadcrumb {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 84px 40px 16px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a {
+      color: var(--text-secondary);
+    }
+
+    .breadcrumb a:hover {
+      color: var(--secondary);
+    }
+
+    .breadcrumb span {
+      margin: 0 8px;
+    }
+
+    /* ===== Section Common ===== */
+    .section {
+      padding: 60px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-full {
+      padding: 60px 40px;
+      background: var(--card);
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    /* ===== Company Intro ===== */
+    .intro-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .intro-text p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .intro-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-image {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .intro-image img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+    }
+
+    /* ===== Advantages ===== */
+    .advantages-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .advantage-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
+    }
+
+    .advantage-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .advantage-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .advantage-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .advantage-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border-radius: var(--radius);
+      color: var(--secondary);
+      font-size: 22px;
+    }
+
+    /* ===== Contact ===== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .contact-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .contact-item-text p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .qr-placeholder {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 160px;
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+
+    /* ===== Footer ===== */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      padding: 40px;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .footer-contact {
+      font-size: 13px;
+      opacity: 0.85;
+      text-align: right;
+    }
+
+    .footer-contact p {
+      margin-bottom: 4px;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1024px) {
+      .navbar-inner,
+      .breadcrumb,
+      .section,
+      .section-full,
+      .footer {
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+
+      .advantages-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .intro-content,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar-inner,
+      .breadcrumb,
+      .section,
+      .section-full,
+      .footer {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .advantages-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .footer-contact {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="logo">KDAI</div>
+      <ul class="nav-links">
+        <li><a href="index.html" data-cn="首页" data-en="Home">首页</a></li>
+        <li><a href="products.html" data-cn="产品中心" data-en="Products">产品中心</a></li>
+        <li><a href="about.html" class="active" data-cn="关于我们" data-en="About Us">关于我们</a></li>
+      </ul>
+      <div class="lang-switch">
+        <button id="lang-cn" class="active">中文</button>
+        <button id="lang-en">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="index.html" data-cn="首页" data-en="Home">首页</a>
+    <span>/</span>
+    <span data-cn="关于我们" data-en="About Us">关于我们</span>
+  </div>
+
+  <!-- Company Intro -->
+  <div class="section">
+    <h2 class="section-title" data-cn="公司简介" data-en="Company Profile">公司简介</h2>
+    <div class="intro-content">
+      <div class="intro-text">
+        <p data-cn="KDAI是一家专注深海工业照明设备研发与制造的科技企业，致力于为无人潜行器、深海勘探设备、水下机器人等提供高可靠性照明解决方案。" data-en="KDAI is a technology company specializing in the R&D and manufacturing of deep sea industrial lighting equipment, dedicated to providing high-reliability lighting solutions for UUVs, deep sea exploration equipment, and underwater robots.">KDAI是一家专注深海工业照明设备研发与制造的科技企业，致力于为无人潜行器、深海勘探设备、水下机器人等提供高可靠性照明解决方案。</p>
+        <p data-cn="公司拥有核心光学设计与深海密封技术，产品覆盖200米至6000米全深度等级，已广泛应用于海洋科研、深海矿产开采、水下工程检测等领域。" data-en="With core optical design and deep sea sealing technology, our products cover all depth ratings from 200m to 6000m, widely used in marine research, deep sea mining, underwater engineering inspection, and more.">公司拥有核心光学设计与深海密封技术，产品覆盖200米至6000米全深度等级，已广泛应用于海洋科研、深海矿产开采、水下工程检测等领域。</p>
+        <p data-cn="我们以"可靠照明，照亮深海"为使命，持续为全球客户提供专业的深海照明产品与服务。" data-en="With the mission of \"Reliable Lighting, Illuminating the Deep Sea\", we continue to provide professional deep sea lighting products and services to global customers.">我们以"可靠照明，照亮深海"为使命，持续为全球客户提供专业的深海照明产品与服务。</p>
+      </div>
+      <div class="intro-image">
+        <img src="https://picsum.photos/seed/kdai-about/600/280" alt="KDAI">
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Advantages -->
+  <div class="section-full">
+    <div class="section" style="padding-top: 0; padding-bottom: 0;">
+      <h2 class="section-title" data-cn="我们的优势" data-en="Our Advantages">我们的优势</h2>
+      <div class="advantages-grid">
+        <div class="advantage-card">
+          <div class="advantage-icon">&#9881;</div>
+          <h3 data-cn="自主研发" data-en="Independent R&D">自主研发</h3>
+          <p data-cn="拥有核心光学设计与深海密封技术专利，从设计到制造全程自主可控" data-en="Core optical design and deep sea sealing technology patents, fully self-controlled from design to manufacturing">拥有核心光学设计与深海密封技术专利，从设计到制造全程自主可控</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">&#10003;</div>
+          <h3 data-cn="品质保障" data-en="Quality Assurance">品质保障</h3>
+          <p data-cn="所有产品通过第三方权威机构检测认证，质量可追溯，交付可靠" data-en="All products tested and certified by third-party authorities, traceable quality, reliable delivery">所有产品通过第三方权威机构检测认证，质量可追溯，交付可靠</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">&#9993;</div>
+          <h3 data-cn="快速响应" data-en="Fast Response">快速响应</h3>
+          <p data-cn="专业技术团队7×24小时响应，提供定制化方案与全生命周期技术支持" data-en="Professional technical team 24/7 response, customized solutions and full lifecycle technical support">专业技术团队7×24小时响应，提供定制化方案与全生命周期技术支持</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">&#127760;</div>
+          <h3 data-cn="全球交付" data-en="Global Delivery">全球交付</h3>
+          <p data-cn="产品出口20余个国家和地区，具备完善的国际物流与售后服务体系" data-en="Products exported to 20+ countries and regions, complete international logistics and after-sales service system">产品出口20余个国家和地区，具备完善的国际物流与售后服务体系</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">&#128200;</div>
+          <h3 data-cn="行业经验" data-en="Industry Experience">行业经验</h3>
+          <p data-cn="深耕深海照明领域多年，累计服务国内外海洋工程与科研项目超200项" data-en="Years of deep sea lighting experience, served 200+ domestic and international marine engineering and research projects">深耕深海照明领域多年，累计服务国内外海洋工程与科研项目超200项</p>
+        </div>
+        <div class="advantage-card">
+          <div class="advantage-icon">&#128161;</div>
+          <h3 data-cn="定制服务" data-en="Custom Service">定制服务</h3>
+          <p data-cn="根据客户具体需求提供光学、结构、接口全方位定制，满足特殊应用场景" data-en="Full customization of optics, structure, and interfaces based on specific customer needs for special applications">根据客户具体需求提供光学、结构、接口全方位定制，满足特殊应用场景</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Us -->
+  <div class="section">
+    <h2 class="section-title" data-cn="联系我们" data-en="Contact Us">联系我们</h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">&#128205;</div>
+          <div class="contact-item-text">
+            <h4 data-cn="公司地址" data-en="Address">公司地址</h4>
+            <p data-cn="广东省汕尾市马宫街道办浪清村68号" data-en="No.68, Langqing Village, Magong Subdistrict, Shanwei, Guangdong, China">广东省汕尾市马宫街道办浪清村68号</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">&#128100;</div>
+          <div class="contact-item-text">
+            <h4 data-cn="联系人" data-en="Contact">联系人</h4>
+            <p data-cn="刘生" data-en="Mr. Liu">刘生</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">&#128222;</div>
+          <div class="contact-item-text">
+            <h4 data-cn="联系电话" data-en="Phone">联系电话</h4>
+            <p>13825496855</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">&#9993;</div>
+          <div class="contact-item-text">
+            <h4 data-cn="电子邮箱" data-en="Email">电子邮箱</h4>
+            <p>nexlamp@gmail.com</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="qr-placeholder">
+          <span data-cn="微信二维码占位" data-en="WeChat QR Placeholder">微信二维码占位</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-copyright">
+        &copy; 2026 <span data-cn="汕尾市旷代深海照明有限公司" data-en="Shanwei Kuangdai Deep Sea Lighting Co., Ltd.">汕尾市旷代深海照明有限公司</span>. <span data-cn="版权所有" data-en="All Rights Reserved">版权所有</span>
+      </div>
+      <div class="footer-contact">
+        <p data-cn="联系人：刘生" data-en="Contact: Mr. Liu">联系人：刘生</p>
+        <p data-cn="电话：13825496855" data-en="Tel: 13825496855">电话：13825496855</p>
+        <p>nexlamp@gmail.com</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Language Switch JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var cnBtn = document.getElementById('lang-cn');
+      var enBtn = document.getElementById('lang-en');
+
+      function switchLang(lang) {
+        document.querySelectorAll('[data-cn]').forEach(function(el) {
+          el.textContent = el.getAttribute('data-' + lang);
+        });
+        cnBtn.classList.toggle('active', lang === 'cn');
+        enBtn.classList.toggle('active', lang === 'en');
+        localStorage.setItem('kdai-lang', lang);
+      }
+
+      cnBtn.addEventListener('click', function() { switchLang('cn'); });
+      enBtn.addEventListener('click', function() { switchLang('en'); });
+
+      var savedLang = localStorage.getItem('kdai-lang') || 'cn';
+      switchLang(savedLang);
+    });
+  </script>
+</body>
+</html>
